@@ -285,7 +285,7 @@ func TestEnsureVirtualMachine_CreateVM_SelectNode_LocalStorage(t *testing.T) {
 	t.Cleanup(func() { selectNextNode = scheduler.ScheduleVM })
 
 	// With local storage the clone must run on the target node itself.
-	expectedOptions := proxmox.VMCloneRequest{Node: "node1", Name: "test", Target: "node1", Full: 1}
+	expectedOptions := proxmox.VMCloneRequest{Node: "node1", Name: "test", Target: "node1", Full: true}
 	response := proxmox.VMCloneResponse{NewID: 123, Task: newTask()}
 	proxmoxClient.EXPECT().CloneVM(context.Background(), 123, expectedOptions).Return(response, nil).Once()
 
